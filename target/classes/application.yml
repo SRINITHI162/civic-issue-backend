@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: civic-issue-system
+  datasource:
+    url:  jdbc:mysql://localhost:3306/civic_issue_system?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: 161828
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update        # use 'validate' in production, run schema.sql manually
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 25MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your_email@gmail.com
+    password: your_password
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:changeThisToALongRandomSecretKeyForProductionUseOnly123456}
+    expiration-ms: 86400000        # 24 hours
+    refresh-expiration-ms: 604800000  # 7 days
+  file:
+    upload-dir: uploads/
+  cors:
+    allowed-origins: http://localhost:3000
+
+logging:
+  level:
+    com.civicissue: DEBUG
+    org.springframework.security: INFO
